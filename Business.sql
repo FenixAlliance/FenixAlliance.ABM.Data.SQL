@@ -49,3 +49,18 @@ JOIN Contact c
 GROUP BY b.ID
 ORDER BY COUNT(c.ID) DESC;
 
+-- Get Wallet IDs
+SELECT 
+	b.BusinessLegalName,
+	w.ID AS WalletID
+FROM Business b
+LEFT JOIN WalletAccount w
+	ON w.BusinessID = b.Id;
+
+-- Get an Social Profile IDs
+SELECT 
+	b.BusinessLegalName,
+	sp.ID AS SocialProfileID
+FROM Business b
+LEFT JOIN SocialProfile sp
+	ON sp.BusinessID = b.Id;
