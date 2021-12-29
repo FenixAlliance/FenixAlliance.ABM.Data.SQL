@@ -41,13 +41,6 @@ JOIN BusinessProfileRecord e
 GROUP BY b.ID
 ORDER BY COUNT(e.ID) DESC;
 
--- Get Contacts Count per Business
-SELECT b.ID, b.BusinessLegalName, COUNT(c.ID)
-FROM Business b
-JOIN Contact c
-	ON b.ID = c.BusinessID
-GROUP BY b.ID
-ORDER BY COUNT(c.ID) DESC;
 
 -- Get Wallet IDs
 SELECT 
