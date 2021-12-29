@@ -37,7 +37,7 @@ UPDATE aspnetusers
 SET CurrencyID = "USD.USA"
 WHERE CurrencyID IS NULL;
 
--- Select all customers with it's enrollment count
+-- Select all Users
 SELECT u.Id, u.Email, COUNT(e.ID)
 FROM aspnetusers u
 LEFT JOIN BusinessProfileRecord e
