@@ -1,8 +1,21 @@
 -- Get all the application users
-SELECT * FROM aspnetusers
+SELECT * FROM aspnetusers;
+SELECT Name, LastName, Email, CountryID, CurrencyID, CountryLanguageID, TimezoneID FROM aspnetusers;
+
+-- Get Users Report
+SELECT Id,
+	Email,
+    Name,
+	LastName,
+    PhoneNumber,
+    AccessFailedCount,
+	CASE WHEN TwoFactorEnabled = 0 THEN 'FALSE' ELSE 'TRUE' END "2FA_ENABLED",
+	CASE WHEN PhoneNumberConfirmed = 0 THEN 'FALSE' ELSE 'TRUE' END "PHONE_CONFIRMED",
+	CASE WHEN LockoutEnabled = 0 AND LockoutEnd > CURDATE() THEN 'TRUE' ELSE  'FALSE'END LOCKED_OUT
+FROM aspnetusers
 ORDER BY Timestamp;
 
-SELECT Name, LastName, Email, CountryID, CurrencyID, CountryLanguageID, TimezoneID FROM aspnetusers;
+
 
 -- Correct mismatching emails
 UPDATE aspnetusers
