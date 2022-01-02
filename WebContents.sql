@@ -15,10 +15,10 @@ JOIN webportal wp
 
 -- Set Featured Image to Highlighed Image  where not exists
 UPDATE WebContent
-SET FeaturedImageURL = HighlightImage
+SET FeaturedImageURL = "/ui/images/generic-blogpost-image.png"
 WHERE FeaturedImageURL IS NULL;
 
 -- Set Highlighed Image to Featured Image where not exists
 UPDATE WebContent
-SET HighlightImage = FeaturedImageURL 
+SET HighlightImage = "/ui/images/generic-blogpost-image.png"
 WHERE HighlightImage IS NULL;

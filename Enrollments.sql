@@ -6,3 +6,7 @@ JOIN aspnetusers u
 JOIN Business b
 	ON b.ID = e.BusinessID
 ORDER BY b.BusinessLegalName;
+
+-- Deselect All Businesses
+UPDATE aspnetusers
+SET SelectedBusinessID = NULL;

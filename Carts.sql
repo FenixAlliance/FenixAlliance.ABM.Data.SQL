@@ -12,6 +12,10 @@ LEFT JOIN CartRecord cr
 GROUP BY c.ID
 ORDER BY COUNT(cr.ID) DESC;
 
+-- Get all Guest Carts
+SELECT * FROM Cart
+WHERE Type = "GuestCart";
+
 -- Delete all Cart Records
 TRUNCATE CartRecord;
 
