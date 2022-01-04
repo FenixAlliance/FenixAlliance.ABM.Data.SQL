@@ -18,4 +18,15 @@ FROM WalletAccount sp
 RIGHT JOIN aspnetusers u
 	ON sp.AccountHolderID = u.Id
 ORDER BY sp.ID;
+
+-- Get Social Posts
+SELECT *
+FROM socialpost;
+
+-- Get Social Post Reactions
+SELECT *
+FROM socialreaction;
     
+    -- Get Social Posts
+SELECT *
+FROM socialcomment;
