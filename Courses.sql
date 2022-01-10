@@ -14,3 +14,6 @@ JOIN contact c
 JOIN aspnetusers u
 	on u.Id = c.RelatedAccountHolderID
 Where i.Type = "Course";
+
+SELECT *
+FROM CourseWiki;

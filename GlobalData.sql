@@ -10,7 +10,6 @@ SELECT * FROM timezone;
 -- Get all timezones
 SELECT * FROM countrylanguage;
 
-
 -- Get all Country States (COUNT)
 SELECT COUNT(*) FROM countrystate;
 
