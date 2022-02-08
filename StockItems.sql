@@ -17,6 +17,7 @@ ORDER BY i.BusinessID;
 -- Get all Stock Items (Items) with their respective Business
 SELECT b.BusinessLegalName,
 	i.Title,
+	i.PrimaryImageURL,
 	i.EstimatedRevenueInUSD
 FROM Item i
 JOIN Business b
