@@ -1,7 +1,7 @@
 -- Count All Stock Products per Business
 SELECT i.BusinessID,
 	b.BusinessLegalName,
-    COUNT(*) 
+    COUNT(*)
 FROM Item i
 JOIN Business b
 	ON i.BusinessID = b.ID
