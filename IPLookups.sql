@@ -1,0 +1,5 @@
+SELECT * FROM IPLookup;
+
+
+
+DELETE FROM IPLookup;
