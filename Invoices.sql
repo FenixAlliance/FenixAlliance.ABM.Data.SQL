@@ -3,7 +3,14 @@ SELECT b.BusinessLegalName, i.*
 FROM Invoice i
 JOIN Business b
 	ON i.BusinessID = b.ID;
+    
 
+SELECT * FROM Invoice ;
+SELECT * FROM Invoice WHERE ID = "cba9b1b0-1b03-4cc5-9c16-900709950ceb";
+
+select * from appliedtaxpolicyrecord;
+
+select * from billingitemrecord;
 
 -- Get all Invoices Report
 SELECT b.BusinessLegalName,

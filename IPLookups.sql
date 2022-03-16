@@ -1,4 +1,4 @@
-SELECT * FROM IPLookup;
+SELECT * FROM IPLookup WHERE NOT BOT;
 
 
 
