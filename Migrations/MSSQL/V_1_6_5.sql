@@ -18243,3 +18243,1396 @@ INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
 VALUES (N'20220530030209_V_1_6_4', N'6.0.5')
 /
 
+ALTER TABLE "ContactProfile" DROP CONSTRAINT "FK_ContactProfile_PartnerTier_PartnerTierID"
+/
+
+DROP TABLE "PartnerTier"
+/
+
+DROP TABLE "WorkOrder"
+/
+
+ALTER TABLE "Contact" DROP COLUMN "Birdthday"
+/
+
+ALTER TABLE "BusinessSegment" DROP COLUMN "EmployeeHighRangeValue"
+/
+
+ALTER TABLE "BusinessSegment" DROP COLUMN "EmployeeLowRangeValue"
+/
+
+ALTER TABLE "ContactProfile" RENAME COLUMN "PartnerTierID" TO "PartnerProgramTierID"
+/
+
+ALTER INDEX "IX_ContactProfile_PartnerTierID" RENAME TO "IX_ContactProfile_PartnerProgramTierID"
+/
+
+ALTER TABLE "Contact" RENAME COLUMN "PreferedContactMethod" TO "Website"
+/
+
+ALTER TABLE "Contact" RENAME COLUMN "BirthDate" TO "Birthday"
+/
+
+ALTER TABLE "Workstation" ADD "BusinessProfileRecordID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Workstation" ADD "Code" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Workstation" ADD "Description" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Workstation" ADD "LocationID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Workstation" ADD "Type" NVARCHAR2(2000)
+/
+
+ALTER TABLE "WorkOrderType" ADD "BusinessProfileRecordID" NVARCHAR2(450)
+/
+
+ALTER TABLE "WorkOrderType" ADD "Description" NVARCHAR2(2000)
+/
+
+ALTER TABLE "WorkOrderType" ADD "Name" NVARCHAR2(2000)
+/
+
+ALTER TABLE "WorkOrderType" ADD "Timestamp" TIMESTAMP(7) DEFAULT TO_TIMESTAMP('0001-01-01 00:00:00.000', 'YYYY-MM-DD HH24:MI:SS.FF') NOT NULL
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletWithdrawRequest' 
+  and column_name = 'RequestedWithdrawAmountInUSD' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdrawRequest" MODIFY "RequestedWithdrawAmountInUSD" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdrawRequest" MODIFY "RequestedWithdrawAmountInUSD" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletWithdrawRequest' 
+  and column_name = 'RequestedWithdrawAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdrawRequest" MODIFY "RequestedWithdrawAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdrawRequest" MODIFY "RequestedWithdrawAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletWithdraw' 
+  and column_name = 'WithdrawedAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "WithdrawedAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "WithdrawedAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletWithdraw' 
+  and column_name = 'BalanceBeforeWithdraw' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "BalanceBeforeWithdraw" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "BalanceBeforeWithdraw" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletWithdraw' 
+  and column_name = 'BalanceAfterWithdraw' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "BalanceAfterWithdraw" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletWithdraw" MODIFY "BalanceAfterWithdraw" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'TestNetEtherBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "TestNetEtherBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "TestNetEtherBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'RollingReserveTimeInDays' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "RollingReserveTimeInDays" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "RollingReserveTimeInDays" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'RollingReservePercent' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "RollingReservePercent" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "RollingReservePercent" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'MainNetEtherBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "MainNetEtherBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "MainNetEtherBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'BitcoinTestNetBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "BitcoinTestNetBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "BitcoinTestNetBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'WalletAccount' 
+  and column_name = 'BitcoinMainNetBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "BitcoinMainNetBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "WalletAccount" MODIFY "BitcoinMainNetBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+ALTER TABLE "Task" ADD "Data" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data1" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data1Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data2" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data2Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data3" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data3Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data4" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data4Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data5" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data5Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data6" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data6Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data7" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data7Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data8" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data8Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data9" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Data9Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "DataLabel" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "Instructions" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Task" ADD "IsTemplate" NUMBER(1) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Task" ADD "PriorityID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Task" ADD "ServiceCaseID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Task" ADD "ServiceID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Shipment" ADD "ShippingTerms" NUMBER(10) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "CurrencyID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ServiceCase" ADD "Discriminator" NVARCHAR2(2000) NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "Instructions" NVARCHAR2(2000)
+/
+
+ALTER TABLE "ServiceCase" ADD "PriceListID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ServiceCase" ADD "ProductionPlanID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ServiceCase" ADD "PromisedEndDate" TIMESTAMP(7) DEFAULT TO_TIMESTAMP('0001-01-01 00:00:00.000', 'YYYY-MM-DD HH24:MI:SS.FF') NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "PromisedStartDate" TIMESTAMP(7) DEFAULT TO_TIMESTAMP('0001-01-01 00:00:00.000', 'YYYY-MM-DD HH24:MI:SS.FF') NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "Taxable" NUMBER(1) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "TerritoryID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ServiceCase" ADD "WorkLocation" NUMBER(10) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "ServiceCase" ADD "WorkOrderTypeID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ServiceCase" ADD "WorkstationID" NVARCHAR2(450)
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'RequiredSkillRecord' 
+  and column_name = 'Priority' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "RequiredSkillRecord" MODIFY "Priority" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "RequiredSkillRecord" MODIFY "Priority" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+ALTER TABLE "ProductionPlan" ADD "BusinessProfileRecordID" NVARCHAR2(450)
+/
+
+ALTER TABLE "ProductionPlan" ADD "Description" NVARCHAR2(2000)
+/
+
+ALTER TABLE "ProductionPlan" ADD "Timestamp" TIMESTAMP(7) DEFAULT TO_TIMESTAMP('0001-01-01 00:00:00.000', 'YYYY-MM-DD HH24:MI:SS.FF') NOT NULL
+/
+
+ALTER TABLE "ProductionPlan" ADD "Title" NVARCHAR2(2000)
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'PaymentDispute' 
+  and column_name = 'DisputedAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "PaymentDispute" MODIFY "DisputedAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "PaymentDispute" MODIFY "DisputedAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Payment' 
+  and column_name = 'TotalTaxes' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "TotalTaxes" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "TotalTaxes" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Payment' 
+  and column_name = 'TotalCost' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "TotalCost" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "TotalCost" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Payment' 
+  and column_name = 'ForexRate' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "ForexRate" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "ForexRate" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Payment' 
+  and column_name = 'BaseCost' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "BaseCost" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "BaseCost" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Payment' 
+  and column_name = 'AntiFraudScore' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "AntiFraudScore" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Payment" MODIFY "AntiFraudScore" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'JobOffer' 
+  and column_name = 'MinSalaryAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "JobOffer" MODIFY "MinSalaryAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "JobOffer" MODIFY "MinSalaryAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'JobOffer' 
+  and column_name = 'MaxSalaryAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "JobOffer" MODIFY "MaxSalaryAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "JobOffer" MODIFY "MaxSalaryAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'ItemBid' 
+  and column_name = 'Amount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "ItemBid" MODIFY "Amount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "ItemBid" MODIFY "Amount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Item' 
+  and column_name = 'Recurrency' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Item" MODIFY "Recurrency" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Item" MODIFY "Recurrency" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Item' 
+  and column_name = 'CurrentStock' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Item" MODIFY "CurrentStock" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Item" MODIFY "CurrentStock" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'GigApplication' 
+  and column_name = 'Cost' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "GigApplication" MODIFY "Cost" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "GigApplication" MODIFY "Cost" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Gig' 
+  and column_name = 'MinBudget' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Gig" MODIFY "MinBudget" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Gig" MODIFY "MinBudget" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Gig' 
+  and column_name = 'MaxBudget' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Gig" MODIFY "MaxBudget" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Gig" MODIFY "MaxBudget" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Fee' 
+  and column_name = 'TaxPercent' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "TaxPercent" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "TaxPercent" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Fee' 
+  and column_name = 'AddedPercent' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "AddedPercent" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "AddedPercent" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Fee' 
+  and column_name = 'AddedAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "AddedAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Fee" MODIFY "AddedAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'CurriculumRecord' 
+  and column_name = 'Priority' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "CurriculumRecord" MODIFY "Priority" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "CurriculumRecord" MODIFY "Priority" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+ALTER TABLE "Curriculum" ADD "JobApplicantProfileID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Curriculum" ADD "SocialProfileID" NVARCHAR2(450)
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'ContactProfile' 
+  and column_name = 'SalaryExpectation' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "ContactProfile" MODIFY "SalaryExpectation" DECIMAL(18, 2) NULL';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "ContactProfile" MODIFY "SalaryExpectation" DECIMAL(18, 2)';
+ end if;
+end;
+/
+
+ALTER TABLE "ContactProfile" ADD "PartnerProfileStatus" NUMBER(10)
+/
+
+ALTER TABLE "ContactProfile" ADD "PartnerProgramEndDate" TIMESTAMP(7)
+/
+
+ALTER TABLE "ContactProfile" ADD "PartnerProgramStartDate" TIMESTAMP(7)
+/
+
+ALTER TABLE "Contact" ADD "About" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "AllowPhoneCalls" NUMBER(1) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Contact" ADD "BusinessSizeID" NVARCHAR2(450)
+/
+
+ALTER TABLE "Contact" ADD "Data" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data1" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data1Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data2" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data2Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data3" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data3Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data4" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data4Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data5" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data5Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data6" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data6Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data7" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data7Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data8" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data8Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data9" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Data9Label" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "DataLabel" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "Description" NUMBER(1) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Contact" ADD "OrganizationName" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "OrganizationOwnership" NUMBER(10) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Contact" ADD "SICCode" NVARCHAR2(2000)
+/
+
+ALTER TABLE "Contact" ADD "ShippingTerms" NUMBER(10) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Contact" ADD "TaxExempt" NUMBER(1) DEFAULT 0 NOT NULL
+/
+
+ALTER TABLE "Contact" ADD "TickerSymbol" NVARCHAR2(2000)
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Commission' 
+  and column_name = 'TaxComission' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "TaxComission" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "TaxComission" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Commission' 
+  and column_name = 'BaseAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "BaseAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "BaseAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Commission' 
+  and column_name = 'AddedPercent' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "AddedPercent" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "AddedPercent" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Commission' 
+  and column_name = 'AddedAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "AddedAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Commission" MODIFY "AddedAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+ALTER TABLE "BusinessSegment" ADD "CurrencyID" NVARCHAR2(450)
+/
+
+ALTER TABLE "BusinessSegment" ADD "MaxRevenue" BINARY_DOUBLE DEFAULT 0.0E0 NOT NULL
+/
+
+ALTER TABLE "BusinessSegment" ADD "MinRevenue" BINARY_DOUBLE DEFAULT 0.0E0 NOT NULL
+/
+
+ALTER TABLE "Business" ADD "BusinessSizeID" NVARCHAR2(450)
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'BillingCoupon' 
+  and column_name = 'MinimumSpend' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "MinimumSpend" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "MinimumSpend" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'BillingCoupon' 
+  and column_name = 'MaximumSpend' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "MaximumSpend" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "MaximumSpend" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'BillingCoupon' 
+  and column_name = 'DiscountPercent' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "DiscountPercent" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "DiscountPercent" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'BillingCoupon' 
+  and column_name = 'DiscountAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "DiscountAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "BillingCoupon" MODIFY "DiscountAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AppliedFee' 
+  and column_name = 'TotalTaxes' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "TotalTaxes" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "TotalTaxes" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AppliedFee' 
+  and column_name = 'TotalCost' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "TotalCost" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "TotalCost" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AppliedFee' 
+  and column_name = 'BaseAmount' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "BaseAmount" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AppliedFee" MODIFY "BaseAmount" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AccountingEntry' 
+  and column_name = 'ForexRate' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "ForexRate" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "ForexRate" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AccountingEntry' 
+  and column_name = 'Debit' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "Debit" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "Debit" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'AccountingEntry' 
+  and column_name = 'Credit' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "Credit" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "AccountingEntry" MODIFY "Credit" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Account' 
+  and column_name = 'TaxRate' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "TaxRate" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "TaxRate" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Account' 
+  and column_name = 'DebitsBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "DebitsBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "DebitsBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Account' 
+  and column_name = 'CreditsBalance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "CreditsBalance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "CreditsBalance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+declare
+   l_nullable user_tab_columns.nullable % type;
+begin 
+   select nullable into l_nullable 
+   from user_tab_columns 
+  where table_name = 'Account' 
+  and column_name = 'Balance' 
+;
+   if l_nullable = 'N' then 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "Balance" DECIMAL(18, 2) ';
+ else 
+        EXECUTE IMMEDIATE 'ALTER TABLE "Account" MODIFY "Balance" DECIMAL(18, 2) NOT NULL';
+ end if;
+end;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"BusinessSize" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "EmployeeLowRangeValue" NUMBER(10) NOT NULL,
+    "EmployeeHighRangeValue" NUMBER(10) NOT NULL,
+    CONSTRAINT "PK_BusinessSize" PRIMARY KEY ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"PartnerProgram" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "Title" NUMBER(1) NOT NULL,
+    "Criteria" NUMBER(1) NOT NULL,
+    "Description" NUMBER(1) NOT NULL,
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "PartnerProgramEndDate" TIMESTAMP(7) NOT NULL,
+    "PartnerProgramStartDate" TIMESTAMP(7) NOT NULL,
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    CONSTRAINT "PK_PartnerProgram" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_PartnerProgram_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_PartnerProgram_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"Priority" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "Title" NVARCHAR2(2000),
+    "Description" NVARCHAR2(2000),
+    "Notes" NVARCHAR2(2000),
+    "Color" NVARCHAR2(2000),
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    CONSTRAINT "PK_Priority" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_Priority_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_Priority_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"ServiceFulfillmentPreferences" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "Name" NVARCHAR2(2000),
+    "Details" NVARCHAR2(2000),
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "ServiceCaseID" NVARCHAR2(450),
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    CONSTRAINT "PK_ServiceFulfillmentPreferences" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_ServiceFulfillmentPreferences_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillmentPreferences_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillmentPreferences_ServiceCase_ServiceCaseID" FOREIGN KEY ("ServiceCaseID") REFERENCES "ServiceCase" ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"PartnerProgramTier" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "Title" NUMBER(1) NOT NULL,
+    "Criteria" NUMBER(1) NOT NULL,
+    "Description" NUMBER(1) NOT NULL,
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "PartnerProgramID" NVARCHAR2(450),
+    "PriceListID" NVARCHAR2(450),
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    CONSTRAINT "PK_PartnerProgramTier" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_PartnerProgramTier_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_PartnerProgramTier_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID"),
+    CONSTRAINT "FK_PartnerProgramTier_PartnerProgram_PartnerProgramID" FOREIGN KEY ("PartnerProgramID") REFERENCES "PartnerProgram" ("ID"),
+    CONSTRAINT "FK_PartnerProgramTier_PriceList_PriceListID" FOREIGN KEY ("PriceListID") REFERENCES "PriceList" ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"ServiceFulfillment" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "Accepted" NUMBER(1) NOT NULL,
+    "Remarks" NVARCHAR2(2000),
+    "ServiceID" NVARCHAR2(450),
+    "ServiceCaseID" NVARCHAR2(450),
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    "ServiceFulfillmentPreferencesID" NVARCHAR2(450),
+    CONSTRAINT "PK_ServiceFulfillment" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_ServiceFulfillment_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillment_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillment_Item_ServiceID" FOREIGN KEY ("ServiceID") REFERENCES "Item" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillment_ServiceCase_ServiceCaseID" FOREIGN KEY ("ServiceCaseID") REFERENCES "ServiceCase" ("ID"),
+    CONSTRAINT "FK_ServiceFulfillment_ServiceFulfillmentPreferences_ServiceFulfillmentPreferencesID" FOREIGN KEY ("ServiceFulfillmentPreferencesID") REFERENCES "ServiceFulfillmentPreferences" ("ID")
+)';
+END;
+/
+
+BEGIN 
+EXECUTE IMMEDIATE 'CREATE TABLE 
+"PartnerProgramRegistration" (
+    "ID" NVARCHAR2(450) NOT NULL,
+    "FormData" NVARCHAR2(2000),
+    "Timestamp" TIMESTAMP(7) NOT NULL,
+    "RegistrationStatus" NUMBER(10) NOT NULL,
+    "BusinessID" NVARCHAR2(450),
+    "BusinessProfileRecordID" NVARCHAR2(450),
+    "PartnerProgramTierID" NVARCHAR2(450),
+    "PartnerProfileID" NVARCHAR2(450),
+    "PartnerProgramID" NVARCHAR2(450),
+    CONSTRAINT "PK_PartnerProgramRegistration" PRIMARY KEY ("ID"),
+    CONSTRAINT "FK_PartnerProgramRegistration_Business_BusinessID" FOREIGN KEY ("BusinessID") REFERENCES "Business" ("ID"),
+    CONSTRAINT "FK_PartnerProgramRegistration_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID"),
+    CONSTRAINT "FK_PartnerProgramRegistration_ContactProfile_PartnerProfileID" FOREIGN KEY ("PartnerProfileID") REFERENCES "ContactProfile" ("ID"),
+    CONSTRAINT "FK_PartnerProgramRegistration_PartnerProgram_PartnerProgramID" FOREIGN KEY ("PartnerProgramID") REFERENCES "PartnerProgram" ("ID"),
+    CONSTRAINT "FK_PartnerProgramRegistration_PartnerProgramTier_PartnerProgramTierID" FOREIGN KEY ("PartnerProgramTierID") REFERENCES "PartnerProgramTier" ("ID")
+)';
+END;
+/
+
+CREATE INDEX "IX_Workstation_BusinessProfileRecordID" ON "Workstation" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_Workstation_LocationID" ON "Workstation" ("LocationID")
+/
+
+CREATE INDEX "IX_WorkOrderType_BusinessProfileRecordID" ON "WorkOrderType" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_Task_PriorityID" ON "Task" ("PriorityID")
+/
+
+CREATE INDEX "IX_Task_ServiceCaseID" ON "Task" ("ServiceCaseID")
+/
+
+CREATE INDEX "IX_Task_ServiceID" ON "Task" ("ServiceID")
+/
+
+CREATE INDEX "IX_ServiceCase_CurrencyID" ON "ServiceCase" ("CurrencyID")
+/
+
+CREATE INDEX "IX_ServiceCase_PriceListID" ON "ServiceCase" ("PriceListID")
+/
+
+CREATE INDEX "IX_ServiceCase_ProductionPlanID" ON "ServiceCase" ("ProductionPlanID")
+/
+
+CREATE INDEX "IX_ServiceCase_TerritoryID" ON "ServiceCase" ("TerritoryID")
+/
+
+CREATE INDEX "IX_ServiceCase_WorkOrderTypeID" ON "ServiceCase" ("WorkOrderTypeID")
+/
+
+CREATE INDEX "IX_ServiceCase_WorkstationID" ON "ServiceCase" ("WorkstationID")
+/
+
+CREATE INDEX "IX_ProductionPlan_BusinessProfileRecordID" ON "ProductionPlan" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_Curriculum_JobApplicantProfileID" ON "Curriculum" ("JobApplicantProfileID")
+/
+
+CREATE INDEX "IX_Curriculum_SocialProfileID" ON "Curriculum" ("SocialProfileID")
+/
+
+CREATE INDEX "IX_Contact_BusinessSizeID" ON "Contact" ("BusinessSizeID")
+/
+
+CREATE INDEX "IX_BusinessSegment_CurrencyID" ON "BusinessSegment" ("CurrencyID")
+/
+
+CREATE INDEX "IX_Business_BusinessSizeID" ON "Business" ("BusinessSizeID")
+/
+
+CREATE INDEX "IX_PartnerProgram_BusinessID" ON "PartnerProgram" ("BusinessID")
+/
+
+CREATE INDEX "IX_PartnerProgram_BusinessProfileRecordID" ON "PartnerProgram" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_PartnerProgramRegistration_BusinessID" ON "PartnerProgramRegistration" ("BusinessID")
+/
+
+CREATE INDEX "IX_PartnerProgramRegistration_BusinessProfileRecordID" ON "PartnerProgramRegistration" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_PartnerProgramRegistration_PartnerProfileID" ON "PartnerProgramRegistration" ("PartnerProfileID")
+/
+
+CREATE INDEX "IX_PartnerProgramRegistration_PartnerProgramID" ON "PartnerProgramRegistration" ("PartnerProgramID")
+/
+
+CREATE INDEX "IX_PartnerProgramRegistration_PartnerProgramTierID" ON "PartnerProgramRegistration" ("PartnerProgramTierID")
+/
+
+CREATE INDEX "IX_PartnerProgramTier_BusinessID" ON "PartnerProgramTier" ("BusinessID")
+/
+
+CREATE INDEX "IX_PartnerProgramTier_BusinessProfileRecordID" ON "PartnerProgramTier" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_PartnerProgramTier_PartnerProgramID" ON "PartnerProgramTier" ("PartnerProgramID")
+/
+
+CREATE INDEX "IX_PartnerProgramTier_PriceListID" ON "PartnerProgramTier" ("PriceListID")
+/
+
+CREATE INDEX "IX_Priority_BusinessID" ON "Priority" ("BusinessID")
+/
+
+CREATE INDEX "IX_Priority_BusinessProfileRecordID" ON "Priority" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_ServiceFulfillment_BusinessID" ON "ServiceFulfillment" ("BusinessID")
+/
+
+CREATE INDEX "IX_ServiceFulfillment_BusinessProfileRecordID" ON "ServiceFulfillment" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_ServiceFulfillment_ServiceCaseID" ON "ServiceFulfillment" ("ServiceCaseID")
+/
+
+CREATE INDEX "IX_ServiceFulfillment_ServiceFulfillmentPreferencesID" ON "ServiceFulfillment" ("ServiceFulfillmentPreferencesID")
+/
+
+CREATE INDEX "IX_ServiceFulfillment_ServiceID" ON "ServiceFulfillment" ("ServiceID")
+/
+
+CREATE INDEX "IX_ServiceFulfillmentPreferences_BusinessID" ON "ServiceFulfillmentPreferences" ("BusinessID")
+/
+
+CREATE INDEX "IX_ServiceFulfillmentPreferences_BusinessProfileRecordID" ON "ServiceFulfillmentPreferences" ("BusinessProfileRecordID")
+/
+
+CREATE INDEX "IX_ServiceFulfillmentPreferences_ServiceCaseID" ON "ServiceFulfillmentPreferences" ("ServiceCaseID")
+/
+
+ALTER TABLE "Business" ADD CONSTRAINT "FK_Business_BusinessSize_BusinessSizeID" FOREIGN KEY ("BusinessSizeID") REFERENCES "BusinessSize" ("ID")
+/
+
+ALTER TABLE "BusinessSegment" ADD CONSTRAINT "FK_BusinessSegment_Currency_CurrencyID" FOREIGN KEY ("CurrencyID") REFERENCES "Currency" ("ID")
+/
+
+ALTER TABLE "Contact" ADD CONSTRAINT "FK_Contact_BusinessSize_BusinessSizeID" FOREIGN KEY ("BusinessSizeID") REFERENCES "BusinessSize" ("ID")
+/
+
+ALTER TABLE "ContactProfile" ADD CONSTRAINT "FK_ContactProfile_PartnerProgramTier_PartnerProgramTierID" FOREIGN KEY ("PartnerProgramTierID") REFERENCES "PartnerProgramTier" ("ID")
+/
+
+ALTER TABLE "Curriculum" ADD CONSTRAINT "FK_Curriculum_ContactProfile_JobApplicantProfileID" FOREIGN KEY ("JobApplicantProfileID") REFERENCES "ContactProfile" ("ID")
+/
+
+ALTER TABLE "Curriculum" ADD CONSTRAINT "FK_Curriculum_SocialProfile_SocialProfileID" FOREIGN KEY ("SocialProfileID") REFERENCES "SocialProfile" ("ID")
+/
+
+ALTER TABLE "ProductionPlan" ADD CONSTRAINT "FK_ProductionPlan_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_Currency_CurrencyID" FOREIGN KEY ("CurrencyID") REFERENCES "Currency" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_PriceList_PriceListID" FOREIGN KEY ("PriceListID") REFERENCES "PriceList" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_ProductionPlan_ProductionPlanID" FOREIGN KEY ("ProductionPlanID") REFERENCES "ProductionPlan" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_Territory_TerritoryID" FOREIGN KEY ("TerritoryID") REFERENCES "Territory" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_WorkOrderType_WorkOrderTypeID" FOREIGN KEY ("WorkOrderTypeID") REFERENCES "WorkOrderType" ("ID")
+/
+
+ALTER TABLE "ServiceCase" ADD CONSTRAINT "FK_ServiceCase_Workstation_WorkstationID" FOREIGN KEY ("WorkstationID") REFERENCES "Workstation" ("ID")
+/
+
+ALTER TABLE "Task" ADD CONSTRAINT "FK_Task_Item_ServiceID" FOREIGN KEY ("ServiceID") REFERENCES "Item" ("ID")
+/
+
+ALTER TABLE "Task" ADD CONSTRAINT "FK_Task_Priority_PriorityID" FOREIGN KEY ("PriorityID") REFERENCES "Priority" ("ID")
+/
+
+ALTER TABLE "Task" ADD CONSTRAINT "FK_Task_ServiceCase_ServiceCaseID" FOREIGN KEY ("ServiceCaseID") REFERENCES "ServiceCase" ("ID")
+/
+
+ALTER TABLE "WorkOrderType" ADD CONSTRAINT "FK_WorkOrderType_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID")
+/
+
+ALTER TABLE "Workstation" ADD CONSTRAINT "FK_Workstation_BusinessProfileRecord_BusinessProfileRecordID" FOREIGN KEY ("BusinessProfileRecordID") REFERENCES "BusinessProfileRecord" ("ID")
+/
+
+ALTER TABLE "Workstation" ADD CONSTRAINT "FK_Workstation_Location_LocationID" FOREIGN KEY ("LocationID") REFERENCES "Location" ("ID")
+/
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES (N'20220530042909_V_1_6_5', N'6.0.5')
+/
+
